@@ -5,7 +5,10 @@ void delay_us(unsigned int micro);
 
 int main()
 {
-    printf("Test");
+    printf("ON\n");
+    delay_us(9000);
+    printf("OFF\n");
+    delay_us(4500);
 
     return 0;
 }
