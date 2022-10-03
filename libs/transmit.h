@@ -5,8 +5,8 @@ void trasmitNec(unsigned int adress, unsigned int command)
 {
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);
-    adr_len = checkLen(adr_len);
-    cmd_len = checkLen(cmd_len);
+    adr_len = check_len(adr_len);
+    cmd_len = check_len(cmd_len);
     int adr_arr[adr_len];
     int cmd_arr[cmd_len];
 
@@ -28,17 +28,18 @@ void trasmitNec(unsigned int adress, unsigned int command)
     printf("GAP\n");
     delay_us(NEC_GAP);
     // send adress
-    controlLed(adr_arr, adr_len);
+    control_led(adr_arr, adr_len);
     // send inverse adress
-    controlLed(i_adr_arr, adr_len);
+    control_led(i_adr_arr, adr_len);
     // send command
-    controlLed(cmd_arr, cmd_len);
+    control_led(cmd_arr, cmd_len);
     // send inverse command
-    controlLed(i_cmd_arr, cmd_len);
+    control_led(i_cmd_arr, cmd_len);
     // finishing pulse
     printf("ON\n");
     delay_us(NEC_PULSE);
     printf("OFF\n");
+    delay_us(NEC_PULSE);
 }
 
 void transmitSamsung(unsigned int adress, unsigned int command)

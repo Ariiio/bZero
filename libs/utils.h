@@ -1,10 +1,10 @@
 #include <time.h>
 #include <math.h>
 
-#define NEC_START 9000
-#define NEC_GAP 4500
-#define NEC_PULSE 562
-#define NEC_EXTENDED 1687
+#define NEC_START 9000000
+#define NEC_GAP 4500000
+#define NEC_PULSE 562000
+#define NEC_EXTENDED 1687000
 
 void delay_us(unsigned int mili)
 {
@@ -41,7 +41,7 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-void controlLed(int array[], int len)
+void control_led(int array[], int len)
 {
     for (int i = 0; i < len; i++)
     {
@@ -64,7 +64,7 @@ void controlLed(int array[], int len)
     printf("\n\n\n");
 }
 
-int checkLen(int len)
+int check_len(int len)
 {
     int diff = 8 - len;
     if (diff != 0)
