@@ -1,10 +1,10 @@
 #include <time.h>
 #include <math.h>
 
-#define NEC_START 9000000
-#define NEC_GAP 4500000
-#define NEC_PULSE 562000
-#define NEC_EXTENDED 1687000
+#define NEC_START 9000
+#define NEC_GAP 4500
+#define NEC_PULSE 562
+#define NEC_EXTENDED 1687
 
 void delay_us(unsigned int mili)
 {
