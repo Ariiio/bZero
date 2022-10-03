@@ -34,6 +34,7 @@ void trasmitNec(unsigned int adress, unsigned int command)
     // finishing pulse
     printf("ON\n");
     delay_us(NEC_PULSE);
+    printf("OFF\n");
 }
 
 void transmitSamsung(unsigned int adress, unsigned int command)
