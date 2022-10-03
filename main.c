@@ -3,10 +3,10 @@
 
 int main(int argc)
 {
-    unsigned int adress = 0xAD;
-    unsigned int command = 0x9F;
+    unsigned int adress = 0x01;
+    unsigned int command = 0x1A;
 
     trasmitNec(adress, command);
-
+    
     return 0;
 }

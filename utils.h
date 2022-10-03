@@ -63,3 +63,14 @@ void controlLed(int array[], int len)
 
     printf("\n\n\n");
 }
+
+int checkLen(int len)
+{
+    int diff = 8 - len;
+    if (diff != 0)
+    {
+        len += diff;
+    }
+    
+    return len;
+}
