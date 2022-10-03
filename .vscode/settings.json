@@ -1,6 +1,10 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "transmit.h": "c"
-    }
+        "transmit.h": "c",
+        "stdlib.h": "c",
+        "pico.h": "c"
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/pico-sdk-1.4.0",
+    "cmake.configureOnOpen": false
 }

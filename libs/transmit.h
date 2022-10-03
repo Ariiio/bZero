@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "utils.h"
 
+#define LED_PIN 25
+
 void trasmitNec(unsigned int adress, unsigned int command)
 {
     int adr_len = bit_len(adress);
@@ -24,21 +26,25 @@ void trasmitNec(unsigned int adress, unsigned int command)
 
     // replace printf with led logic
     printf("PULSE\n");
+    gpio_put(LED_PIN, 1);
     delay_us(NEC_START);
     printf("GAP\n");
+    gpio_put(LED_PIN, 0);
     delay_us(NEC_GAP);
     // send adress
-    control_led(adr_arr, adr_len);
+    control_led(adr_arr, adr_len, LED_PIN);
     // send inverse adress
-    control_led(i_adr_arr, adr_len);
+    control_led(i_adr_arr, adr_len, LED_PIN);
     // send command
-    control_led(cmd_arr, cmd_len);
+    control_led(cmd_arr, cmd_len, LED_PIN);
     // send inverse command
-    control_led(i_cmd_arr, cmd_len);
+    control_led(i_cmd_arr, cmd_len, LED_PIN);
     // finishing pulse
     printf("ON\n");
+    gpio_put(LED_PIN, 1);
     delay_us(NEC_PULSE);
     printf("OFF\n");
+    gpio_put(LED_PIN, 0);
     delay_us(NEC_PULSE);
 }
 

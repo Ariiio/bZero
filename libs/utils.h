@@ -1,5 +1,6 @@
 #include <time.h>
 #include <math.h>
+// #include "pico/stdlib.h"
 
 #define NEC_START 9000
 #define NEC_GAP 4500
@@ -41,22 +42,26 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-void control_led(int array[], int len)
+void control_led(int array[], int len, int led)
 {
     for (int i = 0; i < len; i++)
     {
         if (!array[i])
         {
             printf("Sent 0\n");
+            gpio_put(led, 1);
             delay_us(NEC_PULSE);
             printf("OFF\n");
+            gpio_put(led, 0);
             delay_us(NEC_PULSE);
         }
         if (array[i])
         {
             printf("Sent 1\n");
+            gpio_put(led, 1);
             delay_us(NEC_PULSE);
             printf("OFF\n");
+            gpio_put(led, 0);
             delay_us(NEC_EXTENDED);
         }
     }
