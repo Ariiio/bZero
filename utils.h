@@ -6,9 +6,9 @@
 #define NEC_PULSE 562
 #define NEC_EXTENDED 1687
 
-void delay_us(unsigned int micro)
+void delay_us(unsigned int mili)
 {
-    clock_t goal = micro / 1000 + clock();
+    clock_t goal = mili / 1000 + clock();
     while (goal > clock());
 }
 

@@ -35,3 +35,8 @@ void trasmitNec(unsigned int adress, unsigned int command)
     printf("ON\n");
     delay_us(NEC_PULSE);
 }
+
+void transmitSamsung(unsigned int adress, unsigned int command)
+{
+    
+}
