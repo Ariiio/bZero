@@ -42,7 +42,7 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-void control_led(int array[], int len, int led)
+void control_led(int array[], int len, int led, int freq, int interval)
 {
     for (int i = 0; i < len; i++)
     {
@@ -67,6 +67,15 @@ void control_led(int array[], int len, int led)
     }
 
     printf("\n\n\n");
+}
+
+void test(int freq, int interval)
+{
+    for (int i = 0; i < freq; i += interval)
+    {
+        /* code */
+    }
+    
 }
 
 int check_len(int len, int bits)
