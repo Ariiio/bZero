@@ -10,6 +10,8 @@ int main()
     unsigned int adress = 0x00;
     unsigned int command = 0x1A;
 
+    printf("Test");
+
     trasmitNec(adress, command);
     
     return 0;

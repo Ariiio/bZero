@@ -1,6 +1,6 @@
 #include <time.h>
 #include <math.h>
-// #include "pico/stdlib.h"
+#include "pico/stdlib.h"
 
 #define NEC_START 9000
 #define NEC_GAP 4500
