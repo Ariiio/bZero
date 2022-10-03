@@ -1,10 +1,10 @@
 #include <time.h>
 #include <math.h>
-#include "pico/stdlib.h"
+// #include "pico/stdlib.h"
 
 #define NEC_START 9000
 #define NEC_GAP 4500
-#define NEC_PULSE 562
+#define NEC_PULSE 562.0
 #define NEC_EXTENDED 1687
 
 void delay_us(unsigned int mili)
@@ -42,6 +42,16 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
+void pulsate(int freq, int interval)
+{
+    for (int i = 0; i < freq; i += interval)
+    {
+        delay_us(interval / 4);
+        delay_us(interval / 4);
+    }
+    
+}
+
 void control_led(int array[], int len, int led, int freq, int interval)
 {
     for (int i = 0; i < len; i++)
@@ -49,19 +59,19 @@ void control_led(int array[], int len, int led, int freq, int interval)
         if (!array[i])
         {
             printf("Sent 0\n");
-            gpio_put(led, 1);
-            pulse(freq, interval);
+            // gpio_put(led, 1);
+            pulsate(freq, interval);
             printf("OFF\n");
-            gpio_put(led, 0);
+            // gpio_put(led, 0);
             delay_us(NEC_PULSE);
         }
         if (array[i])
         {
             printf("Sent 1\n");
-            gpio_put(led, 1);
-            pulse(freq, interval);
+            // gpio_put(led, 1);
+            pulsate(freq, interval);
             printf("OFF\n");
-            gpio_put(led, 0);
+            // gpio_put(led, 0);
             delay_us(NEC_EXTENDED);
         }
     }
@@ -69,25 +79,14 @@ void control_led(int array[], int len, int led, int freq, int interval)
     printf("\n\n\n");
 }
 
-void sussy()
-{
-    printf("ON");
-    pulse(36000, 32); // (889 / 1000000) * 36000
-    printf("OFF");
-    delay_us(889);
-}
+// void sussy()
+// {
+//     printf("ON");
+//     pulse(36000, 32); // (889 / 1000000) * 36000
+//     printf("OFF");
+//     delay_us(889);
+// }
 
-void pulse(int freq, int interval)
-{
-    for (int i = 0; i < freq; i += interval)
-    {
-        printf("ON\n");
-        delay_us(interval / 2);
-        printf("OFF");
-        delay_us(interval / 2);
-    }
-    
-}
 
 int check_len(int len, int bits)
 {

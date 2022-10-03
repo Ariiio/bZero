@@ -3,7 +3,8 @@
     "files.associations": {
         "transmit.h": "c",
         "stdlib.h": "c",
-        "pico.h": "c"
+        "pico.h": "c",
+        "stdio.h": "c"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/.",
     "cmake.configureOnOpen": false

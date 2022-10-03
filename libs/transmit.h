@@ -6,7 +6,7 @@
 
 void trasmitNec(unsigned int adress, unsigned int command)
 {
-    int interval = floor(NEC_PULSE / 1000000);
+    int interval =  NEC_PULSE / 1000000 * NEC_FREQ;
 
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);
@@ -29,10 +29,10 @@ void trasmitNec(unsigned int adress, unsigned int command)
 
     // replace printf with led logic
     printf("PULSE\n");
-    gpio_put(LED_PIN, 1);
+    // gpio_put(LED_PIN, 1);
     delay_us(NEC_START);
     printf("GAP\n");
-    gpio_put(LED_PIN, 0);
+    // gpio_put(LED_PIN, 0);
     delay_us(NEC_GAP);
     // send adress
     control_led(adr_arr, adr_len, LED_PIN, NEC_FREQ, interval);
@@ -44,10 +44,10 @@ void trasmitNec(unsigned int adress, unsigned int command)
     control_led(i_cmd_arr, cmd_len, LED_PIN, NEC_FREQ, interval);
     // finishing pulse
     printf("ON\n");
-    gpio_put(LED_PIN, 1);
+    // gpio_put(LED_PIN, 1);
     delay_us(NEC_PULSE);
     printf("OFF\n");
-    gpio_put(LED_PIN, 0);
+    // gpio_put(LED_PIN, 0);
     delay_us(NEC_PULSE);
 }
 
