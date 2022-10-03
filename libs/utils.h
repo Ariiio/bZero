@@ -47,7 +47,9 @@ void pulsate(int freq, int interval)
 {
     for (int i = 0; i < freq; i += interval)
     {
+        // printf("ON\n");
         delay_us(interval / 4);
+        // printf("OFF\n");
         delay_us(interval / 4);
     }
     
