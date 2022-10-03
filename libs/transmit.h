@@ -43,5 +43,10 @@ void trasmitNec(unsigned int adress, unsigned int command)
 
 void transmitSamsung(unsigned int adress, unsigned int command)
 {
-    
+    // 37.9KHz carrier wave (ON state is a burst of carrier with some duration, OFF is absense of it);
+    // 1 Start bit (4.5ms ON, and 4.5ms OFF);
+    // 32 data bits stream (data + address?);
+    // bit “1” (590μs ON, 1690μs OFF) (thanks to Islam qabel,  for the more precise bit duration);
+    // bit “0” (590μs ON, 590μs OFF);
+    // 1 Stop bit (590μs ON, 590μs OFF);
 }
