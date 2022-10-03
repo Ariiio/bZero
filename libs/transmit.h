@@ -6,7 +6,7 @@
 
 void trasmitNec(unsigned int adress, unsigned int command)
 {
-    int interval = NEC_PULSE / 1000000;
+    int interval = floor(NEC_PULSE / 1000000);
 
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);

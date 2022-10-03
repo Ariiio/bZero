@@ -50,7 +50,7 @@ void control_led(int array[], int len, int led, int freq, int interval)
         {
             printf("Sent 0\n");
             gpio_put(led, 1);
-            delay_us(NEC_PULSE);
+            pulse(freq, interval);
             printf("OFF\n");
             gpio_put(led, 0);
             delay_us(NEC_PULSE);
@@ -59,7 +59,7 @@ void control_led(int array[], int len, int led, int freq, int interval)
         {
             printf("Sent 1\n");
             gpio_put(led, 1);
-            delay_us(NEC_PULSE);
+            pulse(freq, interval);
             printf("OFF\n");
             gpio_put(led, 0);
             delay_us(NEC_EXTENDED);
@@ -69,11 +69,14 @@ void control_led(int array[], int len, int led, int freq, int interval)
     printf("\n\n\n");
 }
 
-void test(int freq, int interval)
+void pulse(int freq, int interval)
 {
     for (int i = 0; i < freq; i += interval)
     {
-        /* code */
+        printf("ON\n");
+        delay_us(interval / 2);
+        printf("OFF");
+        delay_us(interval / 2);
     }
     
 }
