@@ -1,13 +1,13 @@
 #include <stdio.h>
-#include "lib.h"
+// #include "utils.h"
+#include "transmit.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    printf("ON\n");
-    delay_us(9000);
-    printf("OFF\n");
-    delay_us(4500);
-    printf("How can I be homophobic");
+    unsigned int adress = 0xAD;
+    unsigned int command = 0xCD;
+
+    trasmitNec(adress, command);
 
     return 0;
 }
