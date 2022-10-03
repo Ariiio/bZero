@@ -57,3 +57,8 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     // bit “0” (590μs ON, 590μs OFF);
     // 1 Stop bit (590μs ON, 590μs OFF);
 }
+
+void transmitRC_5(unsigned int adress, unsigned int command)
+{
+    
+}
