@@ -44,7 +44,6 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-<<<<<<< HEAD
 void pulsate(int freq, int interval)
 {
     for (int i = 0; i < freq; i += interval)
@@ -56,9 +55,6 @@ void pulsate(int freq, int interval)
 }
 
 void control_led(int array[], int len, int led, int freq, int interval)
-=======
-void control_led_NEC(int array[], int len, int led, int freq, int interval)
->>>>>>> 524ec06cd197bfc0354fb2f97fa2f1521e3068b1
 {
     for (int i = 0; i < len; i++)
     {
