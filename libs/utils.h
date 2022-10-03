@@ -2,10 +2,10 @@
 #include <math.h>
 // #include "pico/stdlib.h"
 
-#define NEC_START 9000
-#define NEC_GAP 4500
+#define NEC_START 9000.0
+#define NEC_GAP 4500.0
 #define NEC_PULSE 562.0
-#define NEC_EXTENDED 1687
+#define NEC_EXTENDED 1687.0
 
 #define RC5_PULSE 889
 
