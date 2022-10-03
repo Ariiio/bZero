@@ -2,10 +2,17 @@
 #include <math.h>
 // #include "pico/stdlib.h"
 
+#define NEC_FREQ 38000
 #define NEC_START 9000.0
 #define NEC_GAP 4500.0
 #define NEC_PULSE 562.0
 #define NEC_EXTENDED 1687.0
+
+#define SAMSUNG_FREQ 37900
+#define SAMSUNG_START 4500.0
+#define SAMSUNG_PULSE 590.0
+#define SAMSUNG_EXTENDED 1690.0
+
 #define RC5_PULSE 889.0
 
 void delay_us(unsigned int mili)
@@ -55,7 +62,7 @@ void pulsate(int freq, int interval)
     
 }
 
-void control_led(int array[], int len, int led, int freq, int interval)
+void control_led_NEC(int array[], int len, int led, int freq, int interval)
 {
     for (int i = 0; i < len; i++)
     {
@@ -76,6 +83,33 @@ void control_led(int array[], int len, int led, int freq, int interval)
             printf("OFF\n");
             // gpio_put(led, 0);
             delay_us(NEC_EXTENDED);
+        }
+    }
+
+    printf("\n\n\n");
+}
+
+void control_led_SAMSUNG(int array[], int len, int led, int freq, int interval)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (!array[i])
+        {
+            printf("Sent 0\n");
+            // gpio_put(led, 1);
+            pulsate(freq, interval);
+            printf("OFF\n");
+            // gpio_put(led, 0);
+            delay_us(SAMSUNG_PULSE);
+        }
+        if (array[i])
+        {
+            printf("Sent 1\n");
+            // gpio_put(led, 1);
+            pulsate(freq, interval);
+            printf("OFF\n");
+            // gpio_put(led, 0);
+            delay_us(SAMSUNG_EXTENDED);
         }
     }
 
