@@ -6,8 +6,7 @@
 #define NEC_GAP 4500.0
 #define NEC_PULSE 562.0
 #define NEC_EXTENDED 1687.0
-
-#define RC5_PULSE 889
+#define RC5_PULSE 889.0
 
 void delay_us(unsigned int mili)
 {
