@@ -7,6 +7,8 @@
 #define NEC_PULSE 562
 #define NEC_EXTENDED 1687
 
+#define RC5_PULSE 889
+
 void delay_us(unsigned int mili)
 {
     clock_t goal = mili / 1000 + clock();
@@ -42,7 +44,7 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-void control_led(int array[], int len, int led, int freq, int interval)
+void control_led_NEC(int array[], int len, int led, int freq, int interval)
 {
     for (int i = 0; i < len; i++)
     {
