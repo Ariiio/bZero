@@ -69,6 +69,14 @@ void control_led(int array[], int len, int led, int freq, int interval)
     printf("\n\n\n");
 }
 
+void sussy()
+{
+    printf("ON");
+    pulse(36000, 32); // (889 / 1000000) * 36000
+    printf("OFF");
+    delay_us(889);
+}
+
 void pulse(int freq, int interval)
 {
     for (int i = 0; i < freq; i += interval)
