@@ -69,9 +69,9 @@ void control_led(int array[], int len, int led)
     printf("\n\n\n");
 }
 
-int check_len(int len)
+int check_len(int len, int bits)
 {
-    int diff = 8 - len;
+    int diff = bits - len;
     if (diff != 0)
     {
         len += diff;

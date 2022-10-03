@@ -11,7 +11,7 @@ int main()
     unsigned int command = 0x1A;
 
     printf("Test");
-
+    
     trasmitNec(adress, command);
     
     return 0;
