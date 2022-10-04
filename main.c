@@ -18,7 +18,7 @@ int main()
     // transmitSamsung(adress, command);
 
     unsigned int adress = 0x01;
-    unsigned int command = 0x13;
+    unsigned int command = 0x15;
 
     transmitSIRC(adress, command, 12);
 

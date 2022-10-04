@@ -66,7 +66,6 @@ void pulsate(int freq, int increment)
         // gpio_put(led, 0);
         delay_us(floor(increment / 4));
     }
-    
 }
 
 void control_led(int array[], int len, int led, int freq, int interval, int zDelay, int oDelay)
