@@ -127,12 +127,14 @@ void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int i
 void reverse_arr(int arr[], int n)
 {
     int aux[n];
- 
-    for (int i = 0; i < n; i++) {
+
+    for (int i = 0; i < n; i++)
+    {
         aux[n - 1 - i] = arr[i];
     }
- 
-    for (int i = 0; i < n; i++) {
+
+    for (int i = 0; i < n; i++)
+    {
         arr[i] = aux[i];
     }
 }
@@ -144,6 +146,6 @@ int check_len(int len, int bits)
     {
         len += diff;
     }
-    
+
     return len;
 }
