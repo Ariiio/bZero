@@ -2,18 +2,23 @@
 #include <math.h>
 // #include "pico/stdlib.h"
 
-#define NEC_FREQ 38000
+#define NEC_FREQ 38000.0
 #define NEC_START 9000.0
 #define NEC_GAP 4500.0
 #define NEC_PULSE 562.0
 #define NEC_EXTENDED 1687.0
 
-#define SAMSUNG_FREQ 37900
+#define SAMSUNG_FREQ 37900.0
 #define SAMSUNG_START 4500.0
 #define SAMSUNG_PULSE 590.0
 #define SAMSUNG_EXTENDED 1690.0
 
 #define RC5_PULSE 889.0
+
+#define SIRC_FREQ 40000.0
+#define SIRC_START 2400.0
+#define SIRC_PULSE 600.0
+#define SIRC_EXTENDED 1200.0
 
 void delay_us(unsigned int mili)
 {
@@ -88,14 +93,50 @@ void control_led(int array[], int len, int led, int freq, int interval, int zDel
     printf("\n");
 }
 
-void LORENZMACHWAS()
+void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int interval, int delay)
 {
-    printf("ON");
-    pulse(36000, 32); // (889 / 1000000) * 36000
-    printf("OFF");
-    delay_us(889);
+    for (int i = 0; i < len; i++)
+    {
+        if (!array[i])
+        {
+            printf("Sent 0\n");
+            pulsate(zFreq, interval);
+            printf("OFF\n");
+            // gpio_put(led, 0);
+            delay_us(delay);
+        }
+        if (array[i])
+        {
+            printf("Sent 1\n");
+            pulsate(oFreq, interval);
+            printf("OFF\n");
+            // gpio_put(led, 0);
+            delay_us(delay);
+        }
+    }
+    printf("\n");
 }
 
+// void LORENZMACHWAS()
+// {
+//     printf("ON");
+//     pulse(36000, 32); // (889 / 1000000) * 36000
+//     printf("OFF");
+//     delay_us(889);
+// }
+
+void reverse_arr(int arr[], int n)
+{
+    int aux[n];
+ 
+    for (int i = 0; i < n; i++) {
+        aux[n - 1 - i] = arr[i];
+    }
+ 
+    for (int i = 0; i < n; i++) {
+        arr[i] = aux[i];
+    }
+}
 
 int check_len(int len, int bits)
 {
