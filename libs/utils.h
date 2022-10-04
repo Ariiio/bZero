@@ -50,79 +50,51 @@ int invert_binary(int num, int bits)
     return num ^ mask;
 }
 
-void pulsate(int freq, int interval)
+void pulsate(int freq, int increment)
 {
-    for (int i = 0; i < freq; i += interval)
+    for (int i = increment; i < freq; i += increment)
     {
         // printf("ON\n");
-        delay_us(interval / 4);
+        // gpio_put(led, 1);
+        delay_us(floor(increment / 4));
         // printf("OFF\n");
-        delay_us(interval / 4);
+        // gpio_put(led, 0);
+        delay_us(floor(increment / 4));
     }
     
 }
 
-void control_led_NEC(int array[], int len, int led, int freq, int interval)
+void control_led(int array[], int len, int led, int freq, int interval, int zDelay, int oDelay)
 {
     for (int i = 0; i < len; i++)
     {
         if (!array[i])
         {
             printf("Sent 0\n");
-            // gpio_put(led, 1);
             pulsate(freq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(NEC_PULSE);
+            delay_us(zDelay);
         }
         if (array[i])
         {
             printf("Sent 1\n");
-            // gpio_put(led, 1);
             pulsate(freq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(NEC_EXTENDED);
+            delay_us(oDelay);
         }
     }
-
-    printf("\n\n\n");
+    printf("\n");
 }
 
-void control_led_SAMSUNG(int array[], int len, int led, int freq, int interval)
+void LORENZMACHWAS()
 {
-    for (int i = 0; i < len; i++)
-    {
-        if (!array[i])
-        {
-            printf("Sent 0\n");
-            // gpio_put(led, 1);
-            pulsate(freq, interval);
-            printf("OFF\n");
-            // gpio_put(led, 0);
-            delay_us(SAMSUNG_PULSE);
-        }
-        if (array[i])
-        {
-            printf("Sent 1\n");
-            // gpio_put(led, 1);
-            pulsate(freq, interval);
-            printf("OFF\n");
-            // gpio_put(led, 0);
-            delay_us(SAMSUNG_EXTENDED);
-        }
-    }
-
-    printf("\n\n\n");
+    printf("ON");
+    pulse(36000, 32); // (889 / 1000000) * 36000
+    printf("OFF");
+    delay_us(889);
 }
-
-// void sussy()
-// {
-//     printf("ON");
-//     pulse(36000, 32); // (889 / 1000000) * 36000
-//     printf("OFF");
-//     delay_us(889);
-// }
 
 
 int check_len(int len, int bits)

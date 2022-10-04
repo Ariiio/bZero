@@ -5,7 +5,8 @@
 
 void trasmitNec(unsigned int adress, unsigned int command)
 {
-    int interval = floor(NEC_PULSE / 1000000 * NEC_FREQ);
+    int iterations = floor(NEC_PULSE / 1000000 * NEC_FREQ);
+    int increment = NEC_PULSE / iterations;
 
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);
@@ -27,34 +28,36 @@ void trasmitNec(unsigned int adress, unsigned int command)
     int_to_bin_digit(invert_cmd, cmd_len, i_cmd_arr);
 
     // replace printf with led logic
-    printf("PULSE\n");
+    printf("START\n");
     int nine = floor(NEC_START / 1000000 * NEC_FREQ);
-    pulsate(NEC_FREQ, nine);
-    // gpio_put(LED_PIN, 1);
-    // delay_us(NEC_START);
-    printf("GAP\n");
-    int gap = floor(NEC_GAP / 1000000 * NEC_FREQ);
-    pulsate(NEC_FREQ, gap);
-    // gpio_put(LED_PIN, 0);
-    // delay_us(NEC_GAP);
+    int nine_increment = NEC_START / nine;
+    pulsate(NEC_START, nine_increment);
+
+    printf("GAP\n\n\n");
+    delay_us(NEC_GAP);
+
     // send adress
-    control_led_NEC(adr_arr, adr_len, LED_PIN, NEC_FREQ, interval);
+    control_led(adr_arr, adr_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+
     // send inverse adress
-    control_led_NEC(i_adr_arr, adr_len, LED_PIN, NEC_FREQ, interval);
+    control_led(i_adr_arr, adr_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+
     // send command
-    control_led_NEC(cmd_arr, cmd_len, LED_PIN, NEC_FREQ, interval);
+    control_led(cmd_arr, cmd_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+
     // send inverse command
-    control_led_NEC(i_cmd_arr, cmd_len, LED_PIN, NEC_FREQ, interval);
+    control_led(i_cmd_arr, cmd_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+
     // finishing pulse
-    printf("ON\n");
-    // gpio_put(LED_PIN, 1);
-    pulsate(NEC_FREQ, interval);
+    printf("\nON\n");
+    pulsate(NEC_PULSE, increment);
     printf("OFF\n");
 }
 
 void transmitSamsung(unsigned int adress, unsigned int command)
 {
-    int interval = floor(SAMSUNG_PULSE / 1000000 * SAMSUNG_FREQ);
+    int iterations = floor(SAMSUNG_PULSE / 1000000 * SAMSUNG_FREQ);
+    int increment = SAMSUNG_PULSE / iterations;
 
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);
@@ -76,14 +79,16 @@ void transmitSamsung(unsigned int adress, unsigned int command)
 
     printf("ON");
     int start = floor(SAMSUNG_START / 1000000 * SAMSUNG_FREQ);
-    pulsate(SAMSUNG_FREQ, start);
+    int start_increment = SAMSUNG_START / start;
+    pulsate(SAMSUNG_START, start_increment);
+    printf("OFF\n");
     delay_us(SAMSUNG_START);
     // send adress
-    control_led_SAMSUNG(adr_arr, adr_len, LED_PIN, SAMSUNG_FREQ, interval);
+    control_led(adr_arr, adr_len, LED_PIN, SAMSUNG_PULSE, increment SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // send command
-    control_led_SAMSUNG(cmd_arr, cmd_len, LED_PIN, SAMSUNG_FREQ, interval);
+    control_led(cmd_arr, cmd_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // end bit
-    pulsate(SAMSUNG_FREQ, interval);
+    pulsate(SAMSUNG_PULSE, increment);
 }
 
 void transmitRC5(unsigned int adress, unsigned int command)
