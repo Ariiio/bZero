@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "utils.h"
 
-#define LED_PIN 25
-
 void trasmitNec(unsigned int adress, unsigned int command)
 {
     // get burst iteration to show 562us
@@ -53,7 +51,7 @@ void trasmitNec(unsigned int adress, unsigned int command)
     pulsate(NEC_START, nine_increment);
 
     printf("GAP\n\n\n");
-    delay_us(NEC_GAP);
+    sleep_us(NEC_GAP);
 
     // send adress
     control_led(adr_arr, adr_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
@@ -97,7 +95,7 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     pulsate(SAMSUNG_START, start_increment);
 
     printf("OFF\n");
-    delay_us(SAMSUNG_START);
+    sleep_us(SAMSUNG_START);
 
     // send adress
     control_led(adr_arr, adr_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
@@ -106,7 +104,7 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     // end bit
     pulsate(SAMSUNG_PULSE, increment);
     printf("OFF");
-    delay_us(SAMSUNG_PULSE);
+    sleep_us(SAMSUNG_PULSE);
 }
 
 void transmitRC5(unsigned int adress, unsigned int command)
@@ -149,7 +147,7 @@ void transmitSIRC(unsigned int adress, unsigned int command, int bit_mode)
     pulsate(SIRC_START, start_increment);
 
     printf("GAP\n\n");
-    delay_us(SIRC_PULSE);
+    sleep_us(SIRC_PULSE);
 
     control_led_SIRC(cmd_arr, cmd_len, LED_PIN, SIRC_PULSE, SIRC_EXTENDED, increment, SIRC_PULSE);
     

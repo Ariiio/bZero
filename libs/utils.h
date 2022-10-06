@@ -1,6 +1,9 @@
 #include <time.h>
 #include <math.h>
-// #include "pico/stdlib.h"
+#include "pico/stdlib.h"
+
+#define LED_PIN 13
+#define BTN_PIN 12
 
 #define NEC_FREQ 38000.0
 #define NEC_START 9000.0
@@ -20,11 +23,11 @@
 #define SIRC_PULSE 600.0
 #define SIRC_EXTENDED 1200.0
 
-void delay_us(unsigned int mili)
-{
-    clock_t goal = mili / 1000 + clock();
-    while (goal > clock());
-}
+// void sleep_us(unsigned int mili)
+// {
+//     clock_t goal = mili / 1000 + clock();
+//     while (goal > clock());
+// }
 
 int bit_len(unsigned int n)
 {
@@ -60,11 +63,11 @@ void pulsate(int freq, int increment)
     for (int i = increment; i < freq; i += increment)
     {
         // printf("ON\n");
-        // gpio_put(led, 1);
-        delay_us(floor(increment / 4));
+        gpio_put(LED_PIN, 1);
+        sleep_us(floor(increment / 4));
         // printf("OFF\n");
-        // gpio_put(led, 0);
-        delay_us(floor(increment / 4));
+        gpio_put(LED_PIN, 0);
+        sleep_us(floor(increment / 4));
     }
 }
 
@@ -78,7 +81,7 @@ void control_led(int array[], int len, int led, int freq, int interval, int zDel
             pulsate(freq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(zDelay);
+            sleep_us(zDelay);
         }
         if (array[i])
         {
@@ -86,7 +89,7 @@ void control_led(int array[], int len, int led, int freq, int interval, int zDel
             pulsate(freq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(oDelay);
+            sleep_us(oDelay);
         }
     }
     printf("\n");
@@ -102,7 +105,7 @@ void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int i
             pulsate(zFreq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(delay);
+            sleep_us(delay);
         }
         if (array[i])
         {
@@ -110,7 +113,7 @@ void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int i
             pulsate(oFreq, interval);
             printf("OFF\n");
             // gpio_put(led, 0);
-            delay_us(delay);
+            sleep_us(delay);
         }
     }
     printf("\n");
@@ -121,7 +124,7 @@ void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int i
 //     printf("ON");
 //     pulse(36000, 32); // (889 / 1000000) * 36000
 //     printf("OFF");
-//     delay_us(889);
+//     sleep_us(889);
 // }
 
 void reverse_arr(int arr[], int n)
