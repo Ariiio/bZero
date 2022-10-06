@@ -19,12 +19,12 @@
 #define SIRC_PULSE 600.0
 #define SIRC_EXTENDED 1200.0
 
-int bit_len(unsigned int n)
-void int_to_bin_digit(unsigned int in, int len_digitis, int *out_digit)
-int invert_binary(int num, int bits)
-void pulsate(int freq, int increment)
-void control_led(int array[], int len, int led, int freq, int interval, int zDelay, int oDelay)
-void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int interval, int delay)
-// void LORENZMACHWAS()
-void reverse_arr(int arr[], int n)
-int check_len(int len, int bits)
+int bit_len(unsigned int n);
+void int_to_bin_digit(unsigned int in, int len_digitis, int *out_digit);
+int invert_binary(int num, int bits);
+void pulsate(int freq, int increment);
+void control_led(int array[], int len, int led, int freq, int interval, int zDelay, int oDelay);
+void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int interval, int delay);
+// void LORENZMACHWAS();
+void reverse_arr(int arr[], int n);
+int check_len(int len, int bits);
