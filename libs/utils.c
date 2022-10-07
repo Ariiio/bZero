@@ -59,6 +59,23 @@ void control_led(int array[], int len, int led, int freq, int interval, int zDel
     }
 }
 
+void control_led_RC5(int array[], int len, int led, int freq, int interval, int delay)
+{
+    for (int i = 0; i < len; i++)
+    {
+        if (!array[i])
+        {
+            pulsate(freq, interval);
+            sleep_us(delay);
+        }
+        if (array[i])
+        {
+            pulsate(freq, interval);
+            sleep_us(delay);
+        }
+    }
+}
+
 void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int interval, int delay)
 {
     for (int i = 0; i < len; i++)

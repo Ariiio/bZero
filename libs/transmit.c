@@ -102,6 +102,33 @@ void transmitSamsung(unsigned int adress, unsigned int command)
 
 void transmitRC5(unsigned int adress, unsigned int command)
 {
+    // get burst iteration to show 562us
+    int iterations = floor(RC5_PULSE / 1000000 * RC5_FREQ);
+
+    // get increment needed to produce n bursts
+    int increment = RC5_PULSE / iterations;
+
+    // get bit length of adress and command
+    int adr_len = bit_len(adress);
+    int cmd_len = bit_len(command);
+
+    // check if bit length is 8 (8 bits), if no add needed 0s
+    adr_len = check_len(adr_len, 5);
+    cmd_len = check_len(cmd_len, 6;
+
+    // define adress and command arrays
+    int adr_arr[adr_len];
+    int cmd_arr[cmd_len];
+
+    // fill arrays with bit representation of adress etc
+    int_to_bin_digit(adress, adr_len, adr_arr);
+    int_to_bin_digit(command, cmd_len, cmd_arr);
+
+    // send adress
+    control_led_RC5(adr_arr, adr_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+
+    // send command
+    control_led_RC5(cmd_arr, cmd_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
 }
 
 void transmitRC6(unsigned int adress, unsigned int command)

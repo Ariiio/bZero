@@ -12,6 +12,7 @@
 #define SAMSUNG_PULSE 590.0
 #define SAMSUNG_EXTENDED 1690.0
 
+#define RC5_FREQ 36000.0
 #define RC5_PULSE 889.0
 
 #define SIRC_FREQ 40000.0
@@ -25,6 +26,6 @@ int invert_binary(int num, int bits);
 void pulsate(int freq, int increment);
 void control_led(int array[], int len, int led, int freq, int interval, int zDelay, int oDelay);
 void control_led_SIRC(int array[], int len, int led, int zFreq, int oFreq, int interval, int delay);
-// void LORENZMACHWAS();
+void control_led_RC5(int array[], int len, int led, int freq, int interval, int delay);
 void reverse_arr(int arr[], int n);
 int check_len(int len, int bits);
