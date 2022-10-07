@@ -113,7 +113,7 @@ void transmitRC5(unsigned int adress, unsigned int command)
     int cmd_len = bit_len(command);
 
     // check if bit length is 8 (8 bits), if no add needed 0s
-    adr_len = check_len(adr_len, 5);
+    adr_len = check_len(adr_len, 8);
     cmd_len = check_len(cmd_len, 6;
 
     // define adress and command arrays
