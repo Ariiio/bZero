@@ -79,11 +79,16 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     int adr_arr[adr_len];
     int cmd_arr[cmd_len];
 
+    unsigned int invert_cmd = invert_binary(command, cmd_len);
+    int i_cmd_arr[cmd_len];
+
     int_to_bin_digit(adress, adr_len, adr_arr);
     int_to_bin_digit(command, cmd_len, cmd_arr);
+    int_to_bin_digit(invert_cmd, cmd_len, i_cmd_arr);
 
-    reverse_arr(adr_arr, adr_len);
-    reverse_arr(cmd_arr, cmd_len);
+    // not neccessary?
+    // reverse_arr(adr_arr, adr_len);
+    // reverse_arr(cmd_arr, cmd_len);
 
     int start = floor(SAMSUNG_START / 1000000 * SAMSUNG_FREQ);
     int start_increment = SAMSUNG_START / start;
@@ -93,8 +98,11 @@ void transmitSamsung(unsigned int adress, unsigned int command)
 
     // send adress
     control_led(adr_arr, adr_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
+    control_led(adr_arr, adr_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // send command
     control_led(cmd_arr, cmd_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
+    // send command invert
+    control_led(i_cmd_arr, cmd_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // end bit
     pulsate(SAMSUNG_PULSE, increment);
     sleep_us(SAMSUNG_PULSE);
