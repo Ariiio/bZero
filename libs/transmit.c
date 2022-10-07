@@ -125,10 +125,10 @@ void transmitRC5(unsigned int adress, unsigned int command)
     int_to_bin_digit(command, cmd_len, cmd_arr);
 
     // send adress
-    control_led_RC5(adr_arr, adr_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+    control_led_RC5(adr_arr, adr_len, LED_PIN, RC5_PULSE, increment, RC5_PULSE);
 
     // send command
-    control_led_RC5(cmd_arr, cmd_len, LED_PIN, NEC_PULSE, increment, NEC_PULSE, NEC_EXTENDED);
+    control_led_RC5(cmd_arr, cmd_len, LED_PIN, RC5_PULSE, increment, RC5_PULSE);
 }
 
 void transmitRC6(unsigned int adress, unsigned int command)
