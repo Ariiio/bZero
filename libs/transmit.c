@@ -74,8 +74,8 @@ void transmitSamsung(unsigned int adress, unsigned int command)
 
     int adr_len = bit_len(adress);
     int cmd_len = bit_len(command);
-    adr_len = check_len(adr_len, 16);
-    cmd_len = check_len(cmd_len, 16);
+    adr_len = check_len(adr_len, 8);
+    cmd_len = check_len(cmd_len, 8);
     int adr_arr[adr_len];
     int cmd_arr[cmd_len];
 

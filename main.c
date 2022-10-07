@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "libs/transmit.h"
+#include "libs/transmit.c"
 #include "pico/stdlib.h"
 
 int main()
@@ -13,13 +13,18 @@ int main()
 
     while (true)
     {    
-        unsigned int adress = 0xE579;
-        unsigned int command = 0x8549;
+        unsigned int adress = 0x07;
+        unsigned int command = 0x02;
+
+        unsigned int adress2 = 0x07;
+        unsigned int command2 = 0xE6;
 
         if (gpio_get(BTN_PIN))
         {
             transmitSamsung(adress, command);
-            sleep_ms(500);
+            sleep_ms(50);
+            transmitSamsung(adress2, command2);
+            sleep_ms(250);
         }
     }
     
