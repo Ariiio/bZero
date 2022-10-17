@@ -1,6 +1,9 @@
 #include <math.h>
 #include "pico/stdlib.h"
 #include "utils.h"
+#include "hardware/pio.h"
+#include "hardware/clocks.h"
+#include "blink.pio.h"
 
 int bit_len(unsigned int n)
 {
@@ -36,9 +39,9 @@ void pulsate(int freq, int increment)
     for (int i = increment; i < freq; i += increment)
     {
         gpio_put(LED_PIN, 1);
-        sleep_us(floor(increment / 4));
+        sleep_us(floor(increment / 3));
         gpio_put(LED_PIN, 0);
-        sleep_us(floor(increment / 4));
+        sleep_us(floor(increment / 3));
     }
 }
 

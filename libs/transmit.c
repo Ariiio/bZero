@@ -1,7 +1,7 @@
 #include "utils.c"
 #include "transmit.h"
 
-void trasmitNec(unsigned int adress, unsigned int command)
+void transmitNec(unsigned int adress, unsigned int command)
 {
     // get burst iteration to show 562us
     int iterations = floor(NEC_PULSE / 1000000 * NEC_FREQ);
@@ -86,9 +86,8 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     int_to_bin_digit(command, cmd_len, cmd_arr);
     int_to_bin_digit(invert_cmd, cmd_len, i_cmd_arr);
 
-    // not neccessary?
-    // reverse_arr(adr_arr, adr_len);
-    // reverse_arr(cmd_arr, cmd_len);
+    reverse_arr(adr_arr, adr_len);
+    reverse_arr(cmd_arr, cmd_len);
 
     int start = floor(SAMSUNG_START / 1000000 * SAMSUNG_FREQ);
     int start_increment = SAMSUNG_START / start;
@@ -101,7 +100,7 @@ void transmitSamsung(unsigned int adress, unsigned int command)
     control_led(adr_arr, adr_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // send command
     control_led(cmd_arr, cmd_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
-    // send command invert
+    // send command inverse
     control_led(i_cmd_arr, cmd_len, LED_PIN, SAMSUNG_PULSE, increment, SAMSUNG_PULSE, SAMSUNG_EXTENDED);
     // end bit
     pulsate(SAMSUNG_PULSE, increment);
@@ -122,7 +121,7 @@ void transmitRC5(unsigned int adress, unsigned int command)
 
     // check if bit length is 8 (8 bits), if no add needed 0s
     adr_len = check_len(adr_len, 8);
-    cmd_len = check_len(cmd_len, 6;
+    cmd_len = check_len(cmd_len, 6);
 
     // define adress and command arrays
     int adr_arr[adr_len];
