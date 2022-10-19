@@ -1,0 +1,38 @@
+.program samsung_carrier_control
+
+.define BURST_IRQ 7
+.define NUM_INITIAL_BURSTS 8
+
+.wrap_target
+    pull
+    set X, (NUM_INITIAL_BURSTS - 1)
+long_burst:
+    irq BURST_IRQ
+    jmp X-- long_burst
+    nop [15]
+    irq BURST_IRQ [1]
+data_bit:
+    out X, 1
+    jmp !X, burst
+burst:
+    irq BURST_IRQ
+jmp !OSRE data_bit
+.wrap
+
+% c-sdk {
+    static inline void samsung_carrier_control_program_init(PIO pio, uint sm, uint offset, float tick_rate, int bits_per_frame)
+    {
+        pio_sm_config c = samsung_carrier_control_program_get_default_config(offset);
+
+        sm_config_set_out_shift(&c, true, false, bits_per_frame);
+
+        sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
+
+        float div = clock_get_hz(clk_sys) / tick_rate;
+        sm_config_set_clkdiv(&c, div);
+
+        pio_sm_init(pio, sm, offset, &c);
+
+        pio_sm_set_enabled(pio, sm, true);
+    }
+}
