@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include "libs/transmit.c"
 #include "pico/stdlib.h"
+
+#define LED_PIN 13
+#define BTN_PIN 14
 
 int main()
 {
@@ -16,24 +18,18 @@ int main()
     uint command = 0xE6;
 
     while (true)
-    {    
+    {
         if (gpio_get(BTN_PIN))
         {
-            transmitSamsung(adress, command);
-            sleep_ms(50);
-            transmitSamsung(adress, command);
-            sleep_ms(50);
-            transmitSamsung(adress, 0x02);
-            sleep_ms(250);
+            sleep_ms(100);
         }
     }
-    
+
     // unsigned int adress = 0x59;
     // unsigned int command = 0x16;
-    
+
     // transmitSamsung(adress, command);
     // sleep_ms(4000);
-    
 
     // unsigned int adress = 0x01;
     // unsigned int command = 0x15;
