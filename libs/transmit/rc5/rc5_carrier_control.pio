@@ -1,0 +1,22 @@
+.program rc5_carrier_control
+
+.define BURST_IRQ 7
+.define START_BURSTS 2
+
+.wrap_target
+    pull
+    set X, (START_BURSTS - 1)
+start:
+    nop
+    irq BURST_IRQ
+    jmp X-- start
+
+    irq BURST_IRQ
+data_bit:
+    out X, 1
+    jmp !X burst
+    nop [1]
+burst:
+    irq BURST_IRQ
+jmp !OSRE data_bit
+.wrap

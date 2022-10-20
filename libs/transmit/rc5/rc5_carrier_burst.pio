@@ -1,6 +1,6 @@
-.program samsung_carrier_burst
+.program rc5_carrier_burst
 
-.define NUM_CYCLES 21
+.define NUM_CYCLES 32
 .define BURST_IRQ 7
 .define public TICKS_PER_LOOP 4
 
@@ -8,27 +8,22 @@
     set X, (NUM_CYCLES - 1)
     wait 1 irq BURST_IRQ
 cycle_loop:
-    set pins, 1
-    set pins, 0 [1]
+    set pin, 1
+    set pin, 0 [1]
     jmp X-- cycle_loop
 .wrap
 
-% c-sdk {
-    static inline void samsung_carrier_burst_program_init(PIO pio, uint sm, uint offset, uint pin, float freq)
+% c-sdk
+{
+    static inline void rc5_carrier_burst_program_init(PIO pio, uint sm, uint offset, uint pin, float freq)
     {
-        pio_sm_config c = samsung_carrier_burst_program_get_default_config(offset);
-
+        pio_sm_config c = rc5_carrier_burst_program_get_default_config(offset);
         sm_config_set_set_pins(&c, pin, 1);
-
         pio_gpio_init(pio, pin);
-
         pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
-
-        float div = clock_get_hz(clk_sys) / (freq * samsung_carrier_burst_TICKS_PER_LOOP);
+        float div = clock_get_hz(clk_sys) / (freq * rc5_carrier_burst_TICKS_PER_LOOP);
         sm_config_set_clkdiv(&c, div);
-
         pio_sm_init(pio, sm, offset, &c);
-
         pio_sm_set_enabled(pio, sm, true);
     }
-%}
+&}

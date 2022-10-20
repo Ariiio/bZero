@@ -21,7 +21,7 @@
 cycle_loop:
     set pins, 1                     ; set pin high (1 cycle)
     set pins, 0 [1]                 ; set pin low (2 cycles)
-    jmp X--, cycle_loop             ; (1 more cycle)
+    jmp X-- cycle_loop             ; (1 more cycle)
 .wrap
 
 

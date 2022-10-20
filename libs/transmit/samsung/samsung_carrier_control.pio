@@ -13,7 +13,7 @@ long_burst:
     irq BURST_IRQ [1]
 data_bit:
     out X, 1
-    jmp !X, burst
+    jmp !X burst
 burst:
     irq BURST_IRQ
 jmp !OSRE data_bit
@@ -35,4 +35,4 @@ jmp !OSRE data_bit
 
         pio_sm_set_enabled(pio, sm, true);
     }
-}
+%}

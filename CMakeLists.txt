@@ -10,16 +10,16 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-# pio header files
-pico_generate_pio_header(prod ${CMAKE_CURRENT_LIST_DIR}/libs/transmit/nec/nec_carrier_burst.pio)
-pico_generate_pio_header(prod ${CMAKE_CURRENT_LIST_DIR}/libs/transmit/nec/nec_carrier_control.pio)
+add_subdirectory(libs/transmit/nec)
+add_subdirectory(libs/transmit/samsung)
+add_subdirectory(libs/transmit/rc5)
 
 #prod
 pico_enable_stdio_usb(prod 1)
 pico_enable_stdio_uart(prod 1)
 pico_add_extra_outputs(prod)
 
-target_link_libraries(prod pico_stdlib hardware_pio)
+target_link_libraries(prod pico_stdlib hardware_pio nec_transmit samsung_transmit)
 
 #test
 pico_enable_stdio_usb(test 1)

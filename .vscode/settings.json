@@ -1,6 +1,6 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "stdlib.h": "c"
+        "nec_transmit.h": "c"
     }
 }
