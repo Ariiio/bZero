@@ -8,13 +8,12 @@
     set X, (NUM_CYCLES - 1)
     wait 1 irq BURST_IRQ
 cycle_loop:
-    set pin, 1
-    set pin, 0 [1]
+    set pins, 1
+    set pins, 0 [1]
     jmp X-- cycle_loop
 .wrap
 
-% c-sdk
-{
+% c-sdk {
     static inline void rc5_carrier_burst_program_init(PIO pio, uint sm, uint offset, uint pin, float freq)
     {
         pio_sm_config c = rc5_carrier_burst_program_get_default_config(offset);
@@ -26,4 +25,4 @@ cycle_loop:
         pio_sm_init(pio, sm, offset, &c);
         pio_sm_set_enabled(pio, sm, true);
     }
-&}
+%}
